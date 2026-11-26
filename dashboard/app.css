@@ -1,0 +1,206 @@
+/* Token Radar theme, radar-5: deep navy, teal accent, amber value.
+   Compact: the 1440x900 board screenshot must show the KPI strip,
+   the integrity strip, the ledger, the evidence table and scatter,
+   and at least ten board rows. */
+:root {
+  --canvas: #0d1526;
+  --surface: #131f38;
+  --surface-2: #182747;
+  --ink: #eef2f8;
+  --muted: #9aa8c0;
+  --border: #26365a;
+  --accent: #2dd4a7;
+  --amber: #f5b94a;
+  --negative: #f27d6d;
+  --radius: 8px;
+  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-num: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* Base */
+* { box-sizing: border-box; }
+html { color-scheme: dark; }
+body { margin: 0; background: var(--canvas); color: var(--ink); font: 400 14px/1.45 var(--font-body); }
+h1, h2, h3 { margin: 0; letter-spacing: -0.02em; }
+h1 { font-size: 20px; line-height: 1.2; font-weight: 650; }
+h2 { font-size: 16px; line-height: 1.25; font-weight: 650; }
+h3 { font-size: 14px; line-height: 1.3; font-weight: 650; }
+p { margin: 0; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+::selection { background: rgba(45, 212, 167, 0.35); }
+
+/* Keyboard access */
+.skip { position: absolute; left: -9999px; top: 0; padding: 8px 16px; background: var(--surface-2); border: 1px solid var(--border); z-index: 20; }
+.skip:focus { left: 16px; top: 16px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Page shell */
+.shell { max-width: 1360px; margin: 0 auto; padding: 8px 24px 32px; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+.brand { display: flex; align-items: center; gap: 10px; }
+.mark { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); flex: none; box-shadow: 0 0 0 4px rgba(45, 212, 167, 0.18); }
+.brand-name { font-family: var(--font-num); font-size: 12px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
+.top-meta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; color: var(--muted); font-size: 12px; }
+.top-meta span { white-space: nowrap; }
+
+/* Lede: two short lines, no essay above the board */
+.lede { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 4px 0 2px; }
+.lede p { color: var(--muted); font-size: 13px; max-width: 110ch; margin-top: 2px; }
+.lede .facts { display: flex; gap: 16px; flex: none; }
+.fact { display: flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+.fact b { font-family: var(--font-num); font-size: 14px; font-weight: 600; color: var(--ink); }
+.fact span { color: var(--muted); font-size: 12px; }
+
+/* KPI strip: five small cards in one row */
+.kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; padding: 0 0 4px; }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 10px; display: grid; gap: 1px; align-content: start; }
+.kpi span:first-child { color: var(--muted); font-size: 11px; }
+.kpi b { font-family: var(--font-num); font-size: 13px; font-weight: 600; color: var(--amber); }
+.kpi .sub { font-size: 11px; color: var(--muted); }
+
+/* Accounting bar: one thin strip, every protocol counted once */
+.ledger-bar { display: flex; align-items: center; gap: 10px; padding: 3px 10px; margin-bottom: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-size: 12px; color: var(--muted); overflow-x: auto; }
+.ledger-bar b { color: var(--ink); font-family: var(--font-num); font-weight: 600; white-space: nowrap; }
+.ledger-bar .seg { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+.ledger-bar .dot { width: 8px; height: 8px; border-radius: 2px; flex: none; }
+
+/* Evidence and scatter side by side, above the board */
+.duo { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); gap: 10px; margin-bottom: 10px; }
+.duo .panel { margin-top: 0; padding: 8px 14px; }
+.duo .panel table { font-size: 11px; }
+.duo .panel th, .duo .panel td { padding: 1px 8px; }
+
+/* Controls: search, category, chain, verdict, and the tabs */
+.controls { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; padding: 4px 0; border-top: 1px solid var(--border); }
+.field { display: grid; gap: 2px; }
+.field label { color: var(--muted); font-size: 11px; }
+.field input, .field select { min-height: 26px; padding: 0 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); min-width: 150px; color: var(--ink); font-size: 13px; }
+.field input { min-width: 180px; }
+.tabs { display: flex; gap: 4px; padding: 3px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+.tabs button { min-height: 26px; padding: 0 12px; border: 0; border-radius: 5px; background: transparent; color: var(--muted); font-size: 13px; }
+.tabs button:hover { color: var(--ink); }
+.tabs button[aria-pressed="true"] { background: var(--accent); color: #0d1526; font-weight: 600; }
+.count { margin-left: auto; color: var(--muted); font-size: 12px; align-self: center; }
+
+/* Board table: compact rows, one line each */
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th, td { padding: 1px 10px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: middle; }
+th { color: var(--muted); font-size: 11px; font-weight: 500; white-space: nowrap; }
+th button { display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; padding: 0; color: inherit; font: inherit; }
+th button:hover { color: var(--ink); }
+tbody tr { cursor: pointer; }
+tbody tr:hover { background: var(--surface-2); }
+tbody tr[data-selected="true"] { background: rgba(45, 212, 167, 0.12); }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.name { display: grid; gap: 1px; }
+.name b { font-weight: 600; }
+/* Board rows are one line tall: name and category share a line,
+   and a long category truncates instead of wrapping the row. */
+.name-row { display: flex; align-items: baseline; gap: 6px; }
+.name-row .sub { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sub { color: var(--muted); font-size: 11px; }
+.pos { color: var(--accent); }
+.neg { color: var(--negative); }
+.bar { width: 90px; height: 5px; border-radius: 3px; background: var(--border); overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--amber); }
+.implied { display: flex; align-items: center; gap: 8px; }
+.implied .num { color: var(--amber); font-weight: 600; }
+.status { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; white-space: nowrap; }
+.status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.status.live::before { background: var(--amber); }
+caption.sub { text-align: left; padding: 6px 10px; }
+
+/* Model panels below the board */
+.model { margin-top: 12px; padding: 6px 16px; display: grid; gap: 4px; align-content: start; }
+.model table { font-size: 11px; }
+.model th, .model td { padding: 1px 8px; }
+.formula { font-family: var(--font-num); font-size: 13px; line-height: 1.6; color: var(--muted); overflow-wrap: anywhere; background: var(--canvas); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+.ratios { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+.ratio { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+.ratio b { font-family: var(--font-num); font-weight: 500; }
+
+/* Empty state and buttons */
+.empty { padding: 48px 24px; text-align: center; display: grid; gap: 12px; justify-items: center; }
+.empty p { color: var(--muted); }
+.button { min-height: 34px; padding: 0 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); color: var(--ink); }
+
+/* Detail drawer: a modal dialog docked to the right edge, wide
+   enough for the derivation and the plan side by side */
+.detail { position: fixed; top: 0; right: 0; bottom: 0; width: min(1240px, 96vw); z-index: 10; background: var(--surface); border-left: 1px solid var(--border); padding: 20px 24px; overflow-y: auto; margin: 0 0 0 auto; max-height: 100%; }
+/* The detail drawer's two columns must not outgrow their track:
+   a long benchmark value used to spill across the farm plan. */
+.detail-col { min-width: 0; }
+.detail-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+.detail-col .detail-section { margin-top: 14px; padding-top: 12px; }
+.detail-col .detail-section:first-child { margin-top: 12px; }
+.detail::backdrop { background: rgba(5, 10, 20, 0.6); }
+.detail-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+.detail-head > div { min-width: 0; }
+.close { flex: none; min-height: 34px; padding: 0 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); color: var(--ink); }
+.detail h2 { margin-top: 4px; }
+.detail .sub { margin-top: 4px; }
+.detail-section { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+.detail-section h3 { margin-bottom: 8px; }
+.equation { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; font-family: var(--font-num); font-size: 13px; align-content: start; }
+.equation div { display: flex; justify-content: space-between; gap: 12px; min-width: 0; }
+.equation div > span:first-child { flex: none; width: 210px; }
+.equation div > span:last-child { flex: 1; min-width: 0; }
+.equation span { color: var(--muted); }
+.steps { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.steps li { padding-left: 4px; }
+.steps b { display: block; font-weight: 500; font-size: 12.5px; line-height: 1.4; }
+.cost { color: var(--muted); font-size: 12px; font-family: var(--font-num); }
+.note { color: var(--muted); font-size: 12px; margin-top: 16px; }
+
+/* Verdict badges: green farms, amber thin, muted skips */
+.verdict { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.verdict-farm { background: rgba(45, 212, 167, 0.18); color: var(--accent); }
+.verdict-thin { background: rgba(245, 185, 74, 0.16); color: var(--amber); }
+.verdict-marginal { background: rgba(245, 185, 74, 0.16); color: var(--amber); }
+.verdict-skip { background: var(--surface-2); color: var(--muted); }
+.implied-num { display: grid; gap: 1px; }
+
+/* Scatter: log-log SVG, teal live peers, amber board rows */
+.scatter { margin-top: 2px; }
+.scatter svg { width: 100%; height: auto; display: block; }
+.scatter .grid { stroke: var(--border); stroke-width: 1; }
+.scatter .axis { fill: var(--muted); font-size: 11px; font-family: var(--font-num); }
+.scatter .fitline { stroke: var(--amber); stroke-width: 2; }
+.scatter .dot-live { fill: var(--accent); opacity: 0.8; }
+.scatter .dot-board { fill: var(--amber); opacity: 0.85; }
+
+/* Integrity strip: one thin line under the ledger bar, teal when
+   the browser's refit agrees with the board, red when it does not */
+.seal { display: flex; align-items: baseline; gap: 8px; padding: 3px 10px; margin-bottom: 6px; background: rgba(45, 212, 167, 0.08); border: 1px solid rgba(45, 212, 167, 0.35); border-radius: var(--radius); font-size: 11px; color: var(--muted); white-space: nowrap; }
+.seal b { color: var(--accent); font-weight: 600; white-space: nowrap; }
+.seal span { font-family: var(--font-num); }
+.seal-bad { background: rgba(242, 125, 109, 0.1); border-color: var(--negative); }
+.seal-bad b { color: var(--negative); }
+
+/* What-if selects are narrower than the filters */
+.whatif select { min-width: 92px; }
+
+/* Rank cell: the rank above its bootstrap range */
+.rankcell { display: flex; gap: 5px; align-items: baseline; }
+.rankcell b { font-weight: 600; }
+.rankcell .sub { white-space: nowrap; }
+
+/* The deposit x share grid: the picked scenario is outlined */
+.grid3 td.cur { outline: 1px solid var(--amber); outline-offset: -1px; font-weight: 600; }
+
+/* Derivation table: the label column stays narrow */
+.deriv td:first-child { color: var(--muted); width: 34%; }
+
+/* Narrow screens: stack, wrap the KPI strip, hide the duo's split */
+@media (max-width: 900px) {
+  .shell { padding: 12px; }
+  .lede { flex-direction: column; gap: 8px; }
+  .lede .facts { flex-wrap: wrap; }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .duo { grid-template-columns: 1fr; }
+  .field input { min-width: 0; width: 100%; }
+  .detail-grid { grid-template-columns: 1fr; }
+}
